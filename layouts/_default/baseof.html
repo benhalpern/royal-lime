@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>    
+        
+        <title>{{ if .Title }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google" content="notranslate" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">
+        <link rel="stylesheet" href="{{ (resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "assets/css/main.css" . | resources.ToCSS (dict "indentWidth" 4 "outputStyle" "nested" "precision" 10)).Permalink }}">
+        
+    </head>
+    <body>
+        
+        <div id="page" class="site style-{{ .Site.Params.layout_style }} palette-{{ .Site.Params.palette }}">
+          {{ partial "header.html" . }}
+          <div id="content" class="site-content">
+            <div class="inner">
+              <main id="main" class="site-main">
+                {{ block "content" . }}{{ end }}
+              </main><!-- .site-main -->
+              {{ partial "footer.html" . }}
+            </div><!-- .inner -->
+          </div><!-- .site-content -->
+        </div><!-- .site -->
+        <!-- Scripts -->
+        <script src="{{ "assets/js/plugins.js" | relURL }}"></script>
+        <script src="{{ "assets/js/main.js" | relURL }}"></script>
+    </body> 
+</html>

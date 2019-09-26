@@ -1,0 +1,243 @@
+/**
+ * Content
+ * ----------------------------------------------------------------------------
+ */
+.post {
+  margin-bottom: 3.33333em;
+  position: relative;
+}
+
+.post-header {
+  margin-bottom: 1.66667em;
+}
+
+.post-title {
+  font-size: 2.66667rem;
+  margin: 0 0 1.66667rem;
+
+  a {
+    border: 0;
+    color: inherit;
+
+    &:hover {
+      color: _palette(accent);
+    }
+  }
+}
+
+.post-subtitle {
+  font-size: 1.33333rem;
+  line-height: 1.5;
+  margin-bottom: 1.66667rem;
+}
+
+.post-thumbnail {
+  margin-bottom: 1.66667em;
+
+  img {
+    width: 100%;
+  }
+}
+
+.post-meta {
+  color: _palette(meta);
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  margin-bottom: 1.66667rem;
+  text-transform: uppercase;
+}
+
+/* Post feed */
+.post-feed {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 -0.83333em 1.66667em;
+
+  .post {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 0 0 50%;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 1.66667em;
+  }
+
+  .post-inside {
+    border: 1px solid _palette(border);
+    border-radius: 5px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin: 0 0.833333em;
+  }
+
+  .post-thumbnail {
+    border: 0;
+    border-radius: 5px 5px 0 0;
+    display: block;
+    margin: 0;
+    position: relative;
+    width: 100%;
+
+    &:before {
+      content: "";
+      display: block;
+      padding-top: 66.666%;
+    }
+
+    img {
+      border-radius: 5px 5px 0 0;
+      height: 100%;
+      left: 0;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  .post-header {
+    margin-bottom: 0.83333rem;
+    padding: 1.33333rem 1.33333rem 0;
+  }
+
+  .post-header + .post-thumbnail {
+    padding-top: 0.83333rem;
+  }
+
+  .post-title {
+    border-bottom: 1px solid _palette(border);
+    font-size: 1.33333rem;
+    margin: 0;
+    padding-bottom: 0.83333rem;
+  }
+
+  .post-content {
+    -webkit-flex-grow: 1;
+    -ms-flex: 1;
+    flex-grow: 1;
+    font-size: 16px;
+    padding: 0 1.33333rem;
+  }
+
+  .post-meta {
+    margin: 0;
+    padding: 0 1.33333rem 1.33333rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .post-feed {
+    margin-left: -1.5vw;
+    margin-right: -1.5vw;
+
+    .post {
+      margin-bottom: 3vw;
+    }
+
+    .post-inside {
+      margin-left: 1.5vw;
+      margin-right: 1.5vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 1000px), only screen and (max-width: 600px) {
+.post-feed .post {
+    -webkit-flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+  }
+}
+
+/* Pagination */
+.pagination {
+  padding: 0 70px 1.66667em;
+  position: relative;
+  text-align: center;
+}
+
+.page-number {
+  color: _palette(meta);
+  display: inline-block;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  padding: 0.75em 0;
+  text-transform: uppercase;
+}
+
+.newer-posts,
+.older-posts {
+  position: absolute;
+  top: 0;
+}
+
+.older-posts {
+  left: 0;
+}
+
+.newer-posts {
+  right: 0;
+}
+
+/* Hero section */
+.hero {
+  margin-bottom: 2.5em;
+}
+
+.hero-title {
+  font-size: 2.66667rem;
+  margin: 0 0 1rem;
+}
+
+.hero-text {
+  font-size: 1.33333rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Content blocks */
+.block {
+  margin-bottom: 5em;
+}
+
+.block.read-next {
+  margin-bottom: 3.33333em;
+  margin-top: 5em;
+}
+
+.block-title {
+  color: _palette(secondary);
+  font-size: 1rem;
+  letter-spacing: 0.11111em;
+  margin: 0 0 1.66667rem;
+  text-transform: uppercase;
+}
+
+.block-thumbnail {
+  margin-bottom: 1.66667em;
+
+  img {
+    width: 100%;
+  }
+}
+
+.block-cta .button {
+  margin-right: 15px;
+}

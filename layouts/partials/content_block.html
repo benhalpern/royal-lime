@@ -1,0 +1,18 @@
+<section id="{{ .section.section_id }}" class="block">
+  <h2 class="block-title underline">{{ .section.title }}</h2>
+  {{ if .section.image }}
+  <div class="block-thumbnail">
+    <img src="{{ .section.image | relURL }}" alt="{{ .section.title }}" />
+  </div>
+  {{ end }}
+  <div class="block-content">
+    {{ partial "markdownify-block" .section.content }}
+    {{ if .section.actions }}
+    <p class="block-cta">
+      {{ range $action := .section.actions }}
+      <a href="{{ $action.url | relURL }}" class="button">{{ $action.label }}</a>
+      {{ end }}
+    </p>
+    {{ end }}
+  </div>
+</section><!-- .block -->

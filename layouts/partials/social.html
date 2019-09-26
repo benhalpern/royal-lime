@@ -1,0 +1,7 @@
+<div class="social-links">
+  {{ range $link := .Site.Data.social.links }}
+  {{ if $link }}
+  <a href="{{ $link.url }}" target="_blank" rel="noopener"><span class="fab {{ $link.icon }}" aria-hidden="true"></span><span class="screen-reader-text">{{ $link.title }}</span></a>
+  {{ end }}
+  {{ end }}
+</div><!-- .social-links -->

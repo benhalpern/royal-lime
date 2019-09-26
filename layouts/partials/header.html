@@ -1,0 +1,46 @@
+<header id="masthead" class="site-header {{ .Site.Params.header.bg }}">
+  <div class="site-header-wrap">
+    <div class="site-header-inside">
+      <div class="site-branding">
+        {{ if .Site.Params.header.profile_img }}
+        <p class="profile">
+          <a href='{{ "/" | relURL }}'><img src="{{ .Site.Params.header.profile_img | relURL }}"
+              class="avatar" alt="Author Avatar" /></a>
+        </p><!-- .profile -->
+        {{ end }}
+        <div class="site-identity">
+          {{ if or (eq .Params.layout "home") (eq .Params.layout "blog") }}
+          <h1 class="site-title"><a href='{{ "/" | relURL }}'>{{ .Site.Params.header.title }}</a></h1>
+          {{ else }}
+          <p class="site-title"><a href='{{ "/" | relURL }}'>{{ .Site.Params.header.title }}</a></p>
+          {{ end }}
+          {{ if .Site.Params.header.tagline }}
+          <p class="site-description">{{ .Site.Params.header.tagline }}</p>
+          {{ end }}
+        </div><!-- .site-identity -->
+        {{ if and .Site.Menus.main .Site.Params.header.has_nav }}
+        <button id="menu-toggle" class="menu-toggle"><span class="screen-reader-text">Menu</span><span class="icon-menu"
+            aria-hidden="true"></span></button>
+        {{ end }}
+      </div><!-- .site-branding -->
+      {{ if and .Site.Menus.main .Site.Params.header.has_nav }}
+      <nav id="main-navigation" class="site-navigation" aria-label="Main Navigation">
+        <div class="site-nav-wrap">
+          <div class="site-nav-inside">
+            <ul class="menu">
+              {{ range $item := .Site.Menus.main }}
+              <li class="menu-item {{ if eq $.URL $item.URL }} current-menu-item{{ end }}">
+                <a href="{{ $item.URL | relURL }}">{{ $item.Name }}</a>
+              </li>
+              {{ end }}
+            </ul><!-- .menu -->
+            {{ if .Site.Params.header.has_social }}
+            {{ partial "social.html" . }}
+            {{ end }}
+          </div><!-- .site-nav-inside -->
+        </div><!-- .site-nav-wrap -->
+      </nav><!-- .site-navigation -->
+      {{ end }}
+    </div><!-- .site-header-inside -->
+  </div><!-- .site-header-wrap -->
+</header><!-- .site-header -->

@@ -1,0 +1,66 @@
+{{/*
+    https://discourse.gohugo.io/t/consistent-behavior-of-markdownify-for-single-multiple-paragaphs/8728/5
+
+    The 'markdownify' function removes the surrounding <p> and </p> tags
+    if and only if the result is a single-line/block.  But this means that
+    the results are inconsistent: sometimes the result is flow-level (for
+    simple cases), and sometimes it's block-level (for multi-line or complex
+    cases).
+
+    There's no "leave the wrapping <p> in place" option to markdownify, so we
+    have to work around it ourselves.  We attempt to recognize all possible
+    block-level tags to know whether the result "looks like blocks" or not, and
+    then add a wrapping <p> if we think it's needed.
+
+    To use: {{ partial "markdownify-block" .value.with.markdown }}
+*/ -}}
+{{- $raw := (markdownify . | chomp) -}}
+{{- /*
+    Any of the following tags mean we should consider this an already-
+    blockified result
+    (https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements):
+
+        <address>
+        <article>
+        <aside>
+        <blockquote>
+        <canvas>
+        <dd>
+        <div>
+        <dl>
+        <dt>
+        <fieldset>
+        <figcaption>
+        <figure>
+        <footer>
+        <form>
+        <h1>, <h2>, <h3>, <h4>, <h5>, <h6>
+        <header>
+        <hgroup>
+        <hr>
+        <li>
+        <main>
+        <nav>
+        <noscript>
+        <ol>
+        <output>
+        <p>
+        <pre>
+        <section>
+        <table>
+        <tfoot>
+        <ul>
+        <video>
+
+    Markdownify can't generate all of these, but it's safer to assume it could.
+*/ -}}
+{{- $block := findRE "(?is)^<(?:address|article|aside|blockquote|canvas|dd|div|dl|dt|fieldset|figcaption|figure|footer|form|h(?:1|2|3|4|5|6)|header|hgroup|hr|li|main|nav|noscript|ol|output|p|pre|section|table|tfoot|ul|video)\\b" $raw 1 -}}
+{{- /*
+    The variable $block is now either an empty (length zero) list, or contains
+    the beginning of the block tag that starts the generated HTML.  If it's
+    empty, we know we need to reinstate the <p></p> that markdownify removed.
+
+    There's no "length" function, but we can abuse "range" to get the same
+    effect.
+*/ -}}
+{{ if or $block (not $raw) }}{{ $raw }}{{ else }}<p>{{ $raw }}</p>{{ end -}}

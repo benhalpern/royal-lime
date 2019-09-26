@@ -1,0 +1,10 @@
+<section id="{{ .section.section_id }}" class="hero">
+  {{ if .section.title }}
+  <h2 class="hero-title">{{ .section.title }}</h2>
+  {{ else }}
+  <h2 class="hero-title">Hi, I'm {{ .Site.Data.author.name }}.</h2>
+  {{ end }}
+  <div class="hero-text">
+    {{ partial "markdownify-block" .section.content }}
+  </div>
+</section><!-- .hero -->

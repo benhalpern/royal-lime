@@ -1,0 +1,34 @@
+<section id="{{ .section.section_id }}" class="block">
+  <h2 class="block-title underline">{{ .section.title }}</h2>
+  <div class="post-feed">
+    {{ $display_posts := ((.Site.GetPage "section" "/posts").Pages).ByDate.Reverse }}
+    {{ $recent_posts := $display_posts | first .section.num_posts_displayed }}
+    {{ range $post := $recent_posts }}
+    <article class="post">
+      <div class="post-inside">
+        {{ if $post.Params.thumb_img_path }}
+        <a class="post-thumbnail" href="{{ $post.URL }}"><img class="thumbnail"
+            src="{{ $post.Params.thumb_img_path | relURL }}" alt="{{ $post.Params.title }}" /></a>
+        {{ end }}
+        <header class="post-header">
+          <h3 class="post-title"><a href="{{ $post.URL }}" rel="bookmark">{{ $post.Params.title }}</a></h3>
+        </header>
+        <div class="post-content">
+          <p>{{ $post.Params.excerpt }}</p>
+        </div>
+        <footer class="post-meta">
+          <time class="published"
+            datetime="{{ $post.Date | dateFormat "2006-01-02 15:04" }}">{{ $post.Date | dateFormat "January 02, 2006" }}</time>
+        </footer>
+      </div><!-- .post-inside -->
+    </article><!-- .post -->
+    {{ end }}
+  </div><!-- .post-feed -->
+  {{ if .section.actions }}
+  <p class="block-cta">
+    {{ range $action := .section.actions }}
+    <a href="{{ $action.url | relURL }}" class="button">{{ $action.label }}</a>
+    {{ end }}
+  </p><!-- .block-cta -->
+  {{ end }}
+</section><!-- .block -->

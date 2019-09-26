@@ -1,0 +1,261 @@
+/**
+ * Palettes
+ * ----------------------------------------------------------------------------
+ */
+.palette-blue {
+  a {
+    border-color: _palette(accent-blue);
+
+    &:hover {
+      border-color: currentColor;
+    }
+  }
+
+  button,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  a.button {
+    background: _palette(accent-blue);
+    border-color: _palette(accent-blue);
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: 0;
+      box-shadow: 0 0 1px 7px rgba(_palette(accent-blue),.2);
+    }
+  }
+
+  a.button.circle {
+    background: transparent;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: _palette(accent-blue);
+    }
+  }
+
+  .underline {
+    &:after {
+      border-color: _palette(accent-blue);
+    }
+  }
+
+  .profile {
+    .avatar {
+      border-color: _palette(accent-blue);
+      box-shadow: 0 0 1px 7px rgba(_palette(accent-blue),.2);
+
+      @media only screen and (min-width: 801px) {
+        box-shadow: 0 0 1px 11px rgba(_palette(accent-blue),.2);
+      }
+    }
+  }
+
+  .menu-item a:hover,
+  .current-menu-item a {
+    color: _palette(accent-blue);
+  }
+
+  .social-links {
+    a {
+      border-color: _palette(border);
+
+      &:hover {
+        background: _palette(accent-blue);
+        border-color: _palette(accent-blue);
+        box-shadow: 0 0 1px 5px rgba(_palette(accent-blue),.2);
+      }
+    }
+  }
+
+  .dark .social-links {
+    a {
+      border-color: _palette(primary);
+
+      &:hover {
+        border-color: _palette(accent-blue);
+      }
+    }
+  }
+
+  .post-title {
+    a:hover {
+      color: _palette(accent-blue);
+    }
+  }
+}
+
+.palette-violet {
+  a {
+    border-color: _palette(accent-violet);
+
+    &:hover {
+      border-color: currentColor;
+    }
+  }
+
+  button,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  a.button {
+    background: _palette(accent-violet);
+    border-color: _palette(accent-violet);
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: 0;
+      box-shadow: 0 0 1px 7px rgba(_palette(accent-violet),.2);
+    }
+  }
+
+  a.button.circle {
+    background: transparent;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: _palette(accent-violet);
+    }
+  }
+
+  .underline {
+    &:after {
+      border-color: _palette(accent-violet);
+    }
+  }
+
+  .profile {
+    .avatar {
+      border-color: _palette(accent-violet);
+      box-shadow: 0 0 1px 7px rgba(_palette(accent-violet),.2);
+
+      @media only screen and (min-width: 801px) {
+        box-shadow: 0 0 1px 11px rgba(_palette(accent-violet),.2);
+      }
+    }
+  }
+
+  .menu-item a:hover,
+  .current-menu-item a {
+    color: _palette(accent-violet);
+  }
+
+  .social-links {
+    a {
+      border-color: _palette(border);
+
+      &:hover {
+        background: _palette(accent-violet);
+        border-color: _palette(accent-violet);
+        box-shadow: 0 0 1px 5px rgba(_palette(accent-violet),.2);
+      }
+    }
+  }
+
+  .dark .social-links {
+    a {
+      border-color: _palette(primary);
+
+      &:hover {
+        border-color: _palette(accent-violet);
+      }
+    }
+  }
+
+  .post-title {
+    a:hover {
+      color: _palette(accent-violet);
+    }
+  }
+}
+
+.palette-orange {
+  a {
+    border-color: _palette(accent-orange);
+
+    &:hover {
+      border-color: currentColor;
+    }
+  }
+
+  button,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  a.button {
+    background: _palette(accent-orange);
+    border-color: _palette(accent-orange);
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: 0;
+      box-shadow: 0 0 1px 7px rgba(_palette(accent-orange),.2);
+    }
+  }
+
+  a.button.circle {
+    background: transparent;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: _palette(accent-orange);
+    }
+  }
+
+  .underline {
+    &:after {
+      border-color: _palette(accent-orange);
+    }
+  }
+
+  .profile {
+    .avatar {
+      border-color: _palette(accent-orange);
+      box-shadow: 0 0 1px 7px rgba(_palette(accent-orange),.2);
+
+      @media only screen and (min-width: 801px) {
+        box-shadow: 0 0 1px 11px rgba(_palette(accent-orange),.2);
+      }
+    }
+  }
+
+  .menu-item a:hover,
+  .current-menu-item a {
+    color: _palette(accent-orange);
+  }
+
+  .social-links {
+    a {
+      border-color: _palette(border);
+
+      &:hover {
+        background: _palette(accent-orange);
+        border-color: _palette(accent-orange);
+        box-shadow: 0 0 1px 5px rgba(_palette(accent-orange),.2);
+      }
+    }
+  }
+
+  .dark .social-links {
+    a {
+      border-color: _palette(primary);
+
+      &:hover {
+        border-color: _palette(accent-orange);
+      }
+    }
+  }
+
+  .post-title {
+    a:hover {
+      color: _palette(accent-orange);
+    }
+  }
+}

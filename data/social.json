@@ -1,0 +1,18 @@
+{
+    "links": [
+        {
+            "type": "twitter",
+            "title": "Twitter",
+            "icon": "fa-twitter",
+            "url": "https://twitter.com/bendhalpern"
+        },
+        null,
+        {
+            "type": "github",
+            "title": "GitHub",
+            "icon": "fa-github",
+            "url": "https://github.com/benhalpern"
+        },
+        null
+    ]
+}

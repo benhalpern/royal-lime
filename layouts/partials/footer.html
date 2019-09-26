@@ -1,0 +1,12 @@
+<footer id="colophon" class="site-footer">
+  <p class="site-info">
+    {{ .Site.Params.footer.content | safeHTML }}
+    &nbsp;
+    {{ range $link := .Site.Params.footer.links }}
+    <a href="{{ $link.url }}" {{ if $link.new_window }}target="_blank" rel="noopener"
+      {{ end }}>{{ $link.text }}</a>.
+    {{ end }}
+  </p><!-- .site-info -->
+  <a id="to-top" class="to-top" href="#page"><span class="icon-arrow-up" aria-hidden="true"></span><span
+      class="screen-reader-text">Back to top</span></a>
+</footer><!-- .site-footer -->

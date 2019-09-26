@@ -1,0 +1,569 @@
+stackbitVersion: ~0.2.0
+ssgName: hugo
+ssgVersion: 0.1.12
+buildCommand: ./ssg-build.sh
+publishDir: public
+staticDir: static
+uploadDir: images
+dataDir: data
+pagesDir: content
+pageLayoutKey: layout
+metadata:
+  title: Fresh
+  description: A personal theme with a blog
+  author: Stackbit
+  authorURL: 'https://www.stackbit.com'
+  images:
+    small: images/demo-256x192.png
+    large: images/demo-1024x768.png
+sourceMapping:
+  - source:
+      fieldPath: author.name
+    target:
+      file: data/author.json
+      fieldPath: name
+  - source:
+      fieldPath: author.name
+    target:
+      file: config.yml
+      fieldPath: params.header.title
+  - source:
+      fieldPath: author.tagline
+    target:
+      file: config.yml
+      fieldPath: params.header.tagline
+  - source:
+      fieldPath: author.email
+    target:
+      file: data/author.json
+      fieldPath: email
+  - source:
+      fieldPath: author.avatar
+    target:
+      file: data/author.json
+      fieldPath: avatar
+  - source:
+      fieldPath: author.avatar
+    target:
+      file: config.yml
+      fieldPath: params.header.profile_img
+  - source:
+      fieldPath: 'social.links[0].url'
+    target:
+      file: data/social.json
+      fieldPath: 'links[0].url'
+  - source:
+      fieldPath: social.twitter.url
+    target:
+      file: data/social.json
+      fieldPath: 'links[0].url'
+  - source:
+      fieldPath: social.instagram.url
+    target:
+      file: data/social.json
+      fieldPath: 'links[1].url'
+  - source:
+      fieldPath: social.github.url
+    target:
+      file: data/social.json
+      fieldPath: 'links[2].url'
+  - source:
+      fieldPath: social.linkedin.url
+    target:
+      file: data/social.json
+      fieldPath: 'links[3].url'
+  - action: delete
+    condition: >-
+      !context.social.links && !context.social.linkedin &&
+      (context.social.twitter || context.social.github ||
+      context.social.instagram)
+    target:
+      file: data/social.json
+      fieldPath: 'links[3]'
+  - action: delete
+    condition: >-
+      !context.social.links && !context.social.github && (context.social.twitter
+      || context.social.linkedin || context.social.instagram)
+    target:
+      file: data/social.json
+      fieldPath: 'links[2]'
+  - action: delete
+    condition: >-
+      !context.social.links && !context.social.instagram &&
+      (context.social.twitter || context.social.github ||
+      context.social.linkedin)
+    target:
+      file: data/social.json
+      fieldPath: 'links[1]'
+  - action: delete
+    condition: >-
+      !context.social.links && !context.social.twitter &&
+      (context.social.instagram || context.social.github ||
+      context.social.linkedin)
+    target:
+      file: data/social.json
+      fieldPath: 'links[0]'
+stackbit_banner:
+  show_banner: true
+  name: Fresh
+  create_url: 'https://app.stackbit.com/create?theme=fresh'
+  github_url: 'https://github.com/stackbithq/stackbit-theme-fresh'
+models:
+  config:
+    type: config
+    label: Global Site Config
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: Site title
+        required: true
+      - type: string
+        name: baseURL
+        label: Base URL
+        description: Hostname (and path) to the root
+        hidden: true
+      - type: object
+        name: params
+        label: Params
+        description: Site parameters
+        required: true
+        fields:
+          - type: enum
+            name: layout_style
+            label: Layout Style
+            description: The style of the theme layout.
+            options:
+              - default
+              - overflow
+            default: default
+          - type: enum
+            name: palette
+            label: Color Palette
+            description: The color palette of the theme.
+            options:
+              - green
+              - blue
+              - violet
+              - orange
+            default: green
+          - type: object
+            name: header
+            label: Header Configuration
+            fields:
+              - type: string
+                name: title
+                label: Header Title
+                description: >-
+                  The title displayed on the left side. If value is not set, the
+                  author name will be used.
+              - type: string
+                name: tagline
+                label: Header Tagline
+                description: The tagline displayed on the left side.
+              - type: image
+                name: profile_img
+                label: Profile Image
+                description: >-
+                  The author profile image displayed on the left side. If value
+                  is not set, the author avatar will be used.
+              - type: enum
+                name: bg
+                label: Header Background
+                description: The background of the left side.
+                options:
+                  - light
+                  - dark
+                default: light
+              - type: boolean
+                name: has_nav
+                label: Enable Navigation Menu
+                description: Display the navigation menu bar on the left side.
+                default: true
+              - type: boolean
+                name: has_social
+                label: Enable Social Links
+                description: Display social links on the left side.
+                default: true
+          - type: object
+            name: footer
+            label: Footer Configuration
+            fields:
+              - type: string
+                name: content
+                label: Footer Content
+                description: The copyright text displayed in the footer.
+              - type: list
+                name: links
+                label: Links
+                description: A list of links displayed in the footer.
+                items:
+                  type: object
+                  labelField: text
+                  fields:
+                    - type: string
+                      name: text
+                      label: Link text
+                    - type: string
+                      name: url
+                      label: URL
+                      widget: url
+                    - type: boolean
+                      name: new_window
+                      label: Open in new window
+                      default: true
+      - type: site_menus
+        name: menu
+        label: Site Menus
+        description: Menu items not related to a specific page
+      - type: list
+        name: disableKinds
+        label: Disable Kinds
+        description: Enable disabling of all pages of the specified Kinds.
+        items:
+          type: enum
+          options:
+            - page
+            - home
+            - section
+            - taxonomy
+            - taxonomyTerm
+            - RSS
+            - sitemap
+            - robotsTXT
+            - '404'
+        hidden: true
+      - type: boolean
+        name: uglyURLs
+        label: Ugly URLs
+        description: >-
+          When enabled, creates URL of the form /filename.html instead of
+          /filename/.
+        hidden: true
+  social:
+    type: data
+    file: social.json
+    label: Social Links
+    fields:
+      - type: list
+        name: links
+        label: Social Links
+        description: A list of social links displayed on the left side.
+        items:
+          type: object
+          labelField: title
+          fields:
+            - type: string
+              name: type
+              label: Type
+              hidden: true
+            - type: string
+              name: title
+              label: Title
+              required: true
+            - type: string
+              name: icon
+              label: Icon
+              description: Font Awesome icon class name.
+              required: true
+            - type: string
+              name: url
+              label: URL
+              widget: url
+              required: true
+  author:
+    type: data
+    file: author.json
+    label: Author
+    fields:
+      - type: string
+        name: name
+        label: Name
+      - type: string
+        name: email
+        label: Email
+      - type: image
+        name: avatar
+        label: Avatar
+  home:
+    type: page
+    label: Home
+    template: home
+    file: _index.md
+    hideContent: true
+    singleInstance: true
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the page.
+        required: true
+      - type: list
+        name: sections
+        label: Sections
+        description: Home page sections.
+        items:
+          type: reference
+          labelField: title
+          models:
+            - heroblock
+            - contentblock
+            - postsblock
+      - type: page_menus
+        name: menu
+        label: Home Menus
+        description: Which menus should this page show up in
+  blog:
+    type: page
+    label: Blog
+    template: blog
+    file: blog/_index.md
+    hideContent: true
+    singleInstance: true
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the page.
+        required: true
+      - type: page_menus
+        name: menu
+        label: Blog Menus
+        description: Which menus should this page show up in
+  contact:
+    type: page
+    label: Contact
+    template: contact
+    file: contact.md
+    singleInstance: true
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the page.
+        required: true
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The text shown just below the page title.
+      - type: image
+        name: img_path
+        label: Image
+        description: The image shown below the page title and subtitle.
+      - type: page_menus
+        name: menu
+        label: Contact Menus
+        description: Which menus should this page show up in
+  page:
+    type: page
+    label: Page
+    template: page
+    exclude: posts/**
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the page
+        required: true
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The text shown just below the page title.
+      - type: image
+        name: img_path
+        label: Image
+        description: The image shown below the page title and subtitle.
+      - type: page_menus
+        name: menu
+        label: Page Menus
+        description: Which menus should this page show up in
+  post:
+    type: page
+    label: Post
+    template: post
+    folder: posts
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the post
+        required: true
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The text shown just below the post title.
+      - type: date
+        name: date
+        label: Date
+        required: true
+      - type: image
+        name: thumb_img_path
+        label: Featured Image
+        description: The image shown in the blog feed.
+      - type: image
+        name: content_img_path
+        label: Alternative Featured Image
+        description: The image shown in the single post.
+      - type: string
+        name: excerpt
+        label: Excerpt
+        description: The excerpt of the post displayed in the blog feed.
+      - type: page_menus
+        name: menu
+        label: Post Menus
+        description: Which menus should this page show up in
+  section:
+    type: object
+    label: Section
+    labelField: title
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the section.
+      - type: string
+        name: section_id
+        label: Element ID
+      - type: list
+        name: actions
+        label: Action Buttons
+        items:
+          type: action
+      - type: string
+        name: component
+        label: Component
+        required: true
+        hidden: true
+  action:
+    type: object
+    label: Action
+    labelField: label
+    fields:
+      - type: string
+        name: label
+        label: Label
+        required: true
+        description: The text displayed inside the button.
+      - type: string
+        name: url
+        label: Button URL
+        widget: url
+  heroblock:
+    type: object
+    label: Hero Section
+    extends:
+      - section
+    fields:
+      - name: component
+        default: hero_block.html
+      - type: markdown
+        name: content
+        label: Content
+        description: The text content of the section.
+  contentblock:
+    type: object
+    label: Content Section with Optional Image
+    extends:
+      - section
+    fields:
+      - name: component
+        default: content_block.html
+      - type: markdown
+        name: content
+        label: Content
+        description: The text content of the section.
+      - type: image
+        name: image
+        label: Image
+        description: The image displayed below the section title.
+  postsblock:
+    type: object
+    label: Posts List
+    extends:
+      - section
+    fields:
+      - name: component
+        default: posts_block.html
+      - type: number
+        name: num_posts_displayed
+        label: Number of posts to display
+        required: true
+  site_menus:
+    type: object
+    label: Site Menus
+    labelField: null
+    description: >-
+      Site menus model, defines list of menus that can be specified from within
+      site configuration
+    fields:
+      - type: list
+        name: main
+        label: Main menu
+        description: List of items for Main menu
+        items:
+          type: site_menu_item
+  site_menu_item:
+    type: object
+    label: Site Menu Item
+    labelField: name
+    description: 'Site menu item model, defines fields for a single site menu item'
+    fields:
+      - type: string
+        name: identifier
+        label: Identifier
+        description: >-
+          The identifier of a menu item could be used as a parent menu of
+          another menu item
+        required: true
+      - type: string
+        name: name
+        label: Title
+        description: The title of the menu item
+        required: true
+      - type: string
+        name: url
+        label: URL
+        description: The URL the menu item links to
+        required: true
+      - type: number
+        name: weight
+        label: Weight
+        description: Position for sorting
+      - type: string
+        name: parent
+        label: Parent Menu Identifier
+        description: The parent of an entry should be the identifier of another entry.
+  page_menus:
+    type: object
+    label: Page Menus
+    labelField: null
+    description: 'Page menus model, defines menus that can be specified from within pages'
+    fields:
+      - type: page_menu_item
+        name: main
+        label: Main menu item
+        description: Main menu item for this page
+  page_menu_item:
+    type: object
+    label: Page Menu Item
+    labelField: name
+    description: 'Page menu item model, defines fields for a single page menu item'
+    fields:
+      - type: string
+        name: name
+        label: Title
+        description: The title of the menu item
+      - type: number
+        name: weight
+        label: Weight
+        description: Position for sorting
+      - type: string
+        name: identifier
+        label: Identifier
+        description: >-
+          The identifier of a menu item could be used as a parent menu of
+          another menu item
+      - type: string
+        name: parent
+        label: Parent Menu Identifier
+        description: The parent of an entry should be the identifier of another entry.
